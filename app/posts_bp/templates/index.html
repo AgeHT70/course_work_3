@@ -52,6 +52,10 @@
             <img src="././static/assets/img/eye.png" alt="" class="item__counter-icon" width="26">
             <span class="item__counter-text">{{ post.views_count }}</span>
           </div>
+          <div class="item__counter">
+            <img src="././static/assets/img/heart.png" alt="" class="item__counter-icon" width="26">
+            <span class="item__counter-text">{{ post.likes_count }}</span>
+          </div>
         </div>
         <div class="item__post-bottom">
           <a href="/post/{{post.pk}}" class="item__btn-more">Подробнее</a>
