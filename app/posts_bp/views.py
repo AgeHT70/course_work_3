@@ -1,9 +1,14 @@
 from flask import render_template, Blueprint
+
 from .dao.posts_dao import PostsDAO
+from .dao.comments_dao import CommentsDao
+
+
 posts_blueprint = Blueprint('posts_blueprint', __name__, template_folder='templates')
 
 
 posts_dao = PostsDAO("./data/posts.json")
+comments_dao = CommentsDao("./data/comments.json")
 
 
 @posts_blueprint.route('/')
@@ -18,7 +23,9 @@ def main_page():
 @posts_blueprint.route('/post/<int:pk>')
 def post_page(pk):
     post = posts_dao.get_by_pk(pk)
+    comments = comments_dao.get_by_post_pk(pk)
+    comments_count = len(comments)
     # print(post)
-    return render_template('post.html', post=post)
+    return render_template('post.html', post=post, comments=comments, comments_count=comments_count)
 
 
