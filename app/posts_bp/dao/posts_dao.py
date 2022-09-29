@@ -19,3 +19,7 @@ class PostsDAO:
         for post in self.load_data():
             if pk == int(post["pk"]):
                 return post
+
+    def get_by_username(self, username):
+        posts = [post for post in self.load_data() if username.lower() == post["poster_name"].lower()]
+        return posts

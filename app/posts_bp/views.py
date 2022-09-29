@@ -25,7 +25,16 @@ def post_page(pk):
     post = posts_dao.get_by_pk(pk)
     comments = comments_dao.get_by_post_pk(pk)
     comments_count = len(comments)
-    # print(post)
+
     return render_template('post.html', post=post, comments=comments, comments_count=comments_count)
+
+
+@posts_blueprint.route('/users/<username>')
+def user_page(username):
+    posts = posts_dao.get_by_username(username)
+    for post in posts:
+        post["content"] = post["content"][:50] + "..."
+
+    return render_template('user-feed.html', user_posts=posts)
 
 
