@@ -16,4 +16,4 @@ def api_posts():
 @api_blueprint.route('/api/posts/<int:post_id>')
 def api_post_by_pk(post_id):
     post = posts_dao.get_by_pk(post_id)
-    return post
+    return jsonify(post)
