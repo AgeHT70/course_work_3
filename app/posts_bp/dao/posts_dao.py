@@ -22,6 +22,8 @@ class PostsDAO:
 
     def get_by_username(self, username):
         posts = [post for post in self.load_data() if username.lower() == post["poster_name"].lower()]
+        if not posts:
+            raise ValueError("Нет такого пользователя")
         return posts
 
     def get_by_keyword(self, keyword):
