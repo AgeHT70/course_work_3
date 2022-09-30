@@ -1,5 +1,3 @@
-from json import JSONDecodeError
-
 from flask import render_template, Blueprint, request
 
 from .dao.posts_dao import PostsDAO
@@ -43,16 +41,11 @@ def user_page(username):
 @posts_blueprint.route('/search')
 def search_page():
     search_word = request.args.get('s')
-    try:
-        posts = posts_dao.get_by_keyword(search_word)
-        for post in posts:
-            post["content"] = post["content"][:50] + "..."
-        count_posts = len(posts)
-        # loger.info(f"Search by {search_word}")
-    except FileNotFoundError:
-        return "File Not Found"
-    except JSONDecodeError:
-        return "Can`t convert to JSON"
-    else:
-        return render_template('search.html', posts=posts[:10], count_posts=count_posts)
+
+    posts = posts_dao.get_by_keyword(search_word)
+    for post in posts:
+        post["content"] = post["content"][:50] + "..."
+    count_posts = len(posts)
+
+    return render_template('search.html', posts=posts[:10], count_posts=count_posts)
 
