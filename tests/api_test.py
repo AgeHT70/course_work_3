@@ -24,6 +24,6 @@ class TestApi:
         Проверяем получаем правильный тип данных и необходимый набор ключей
         """
         response = test_client.get(f"/api/posts/1")
-        assert type(response.json) == dict
+        assert type(response.json) == dict, "Возвращает не словарь"
         assert set(response.json.keys()) == set(valid_keys), "Неверный список ключей"
 
