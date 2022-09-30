@@ -3,13 +3,16 @@ from flask import Flask
 
 # Импортируем блюпринты
 from app.posts_bp.views import posts_blueprint
+from app.api.views import api_blueprint
 
 
 # Создаем экземпляр Flask
 app = Flask(__name__)
+app.config['JSON_AS_ASCII'] = False
 
 # Регистрируем блюпринты
 app.register_blueprint(posts_blueprint)
+app.register_blueprint(api_blueprint)
 
 
 @app.errorhandler(404)
