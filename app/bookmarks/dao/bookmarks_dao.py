@@ -16,7 +16,13 @@ class BookmarksDAO:
         return bookmarks
 
     def add(self, post):
-        bookmarks = self.load_data().append(post)
+        bookmarks = self.get_all()
+        bookmarks.append(post)
         with open(self.path, "w", encoding="utf-8") as file:
             json.dump(bookmarks, file, ensure_ascii=False)
-        pass
+
+    def del_bookmark(self, post_pk):
+        bookmarks = self.get_all()
+        bookmarks = [bookmark for bookmark in bookmarks if int(bookmark["pk"]) != post_pk]
+        with open(self.path, "w", encoding="utf-8") as file:
+            json.dump(bookmarks, file, ensure_ascii=False)

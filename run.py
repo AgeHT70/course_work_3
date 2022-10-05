@@ -1,9 +1,10 @@
 from flask import Flask
 
-
+from app import bookmarks
 # Импортируем блюпринты
-from app.posts_bp.views import posts_blueprint
+from app.posts.views import posts_blueprint
 from app.api.views import api_blueprint
+from app.bookmarks.views import bookmarks_blueprint
 
 
 # Создаем экземпляр Flask
@@ -13,6 +14,7 @@ app.config['JSON_AS_ASCII'] = False
 # Регистрируем блюпринты
 app.register_blueprint(posts_blueprint)
 app.register_blueprint(api_blueprint)
+app.register_blueprint(bookmarks_blueprint)
 
 
 @app.errorhandler(404)

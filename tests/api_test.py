@@ -1,3 +1,5 @@
+import pytest
+
 valid_keys = {"poster_name",
               "poster_avatar",
               "pic",
@@ -23,7 +25,6 @@ class TestApi:
         """
         Проверяем получаем правильный тип данных и необходимый набор ключей
         """
-        response = test_client.get(f"/api/posts/1")
+        response = test_client.get("/api/posts/1")
         assert type(response.json) == dict, "Возвращает не словарь"
         assert set(response.json.keys()) == set(valid_keys), "Неверный список ключей"
-
