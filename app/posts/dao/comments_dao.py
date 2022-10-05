@@ -1,6 +1,6 @@
 import json
 
-from app.posts_bp.dao.posts_dao import PostsDAO
+from app.posts.dao.posts_dao import PostsDAO
 
 
 posts_dao = PostsDAO("./data/posts.json")
