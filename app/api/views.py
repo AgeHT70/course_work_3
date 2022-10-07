@@ -1,10 +1,11 @@
 from flask import Blueprint, jsonify
 from app.posts.dao.posts_dao import PostsDAO
+from config import POSTS_PATH, COMMENTS_PATH
 from logger import logger
 
 api_blueprint = Blueprint('api_blueprint', __name__)
 
-posts_dao = PostsDAO("./data/posts.json")
+posts_dao = PostsDAO(POSTS_PATH, COMMENTS_PATH)
 
 
 @api_blueprint.route('/api/posts')

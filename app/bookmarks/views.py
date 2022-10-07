@@ -1,14 +1,15 @@
+from os import path
 from flask import render_template, Blueprint, request, redirect
 
+from config import POSTS_PATH, BOOKMARKS_PATH, COMMENTS_PATH
 from .dao.bookmarks_dao import BookmarksDAO
 from ..posts.dao.posts_dao import PostsDAO
 
+bookmarks_blueprint = Blueprint('bookmarks_blueprint', __name__,
+                                template_folder='templates')
 
-bookmarks_blueprint = Blueprint('bookmarks_blueprint', __name__, template_folder='templates')
-
-
-posts_dao = PostsDAO("./data/posts.json")
-bookmarks_dao = BookmarksDAO("./data/bookmarks.json")
+posts_dao = PostsDAO(POSTS_PATH, COMMENTS_PATH)
+bookmarks_dao = BookmarksDAO(BOOKMARKS_PATH)
 
 
 @bookmarks_blueprint.route('/bookmarks')
@@ -31,4 +32,3 @@ def del_page(post_pk):
     post = posts_dao.get_by_pk(post_pk)
     bookmarks_dao.del_bookmark(post_pk)
     return redirect("/", code=302)
-
