@@ -34,16 +34,16 @@
             </div>
             <span class="item__username">{{post.poster_name}}</span>
           </a>
-          <button type="button" class="item__bookmark-btn">
+          <a href="/bookmarks/add/{{ post.pk }}" class="item__bookmark-btn">
             <img src="../static/img/bookmark.png" alt="" class="item__bookmark-icon" width="24">
-          </button>
+          </a>
         </div>
         <a href="" class="item__post-link">
           <img src={{ post.pic }} alt="" width="348" class="item__post-img">
         </a>
         <div class="item__descr">
           <p class="item__text">
-          {{ post.content }}
+          {{ post.content | safe}}
           </p>
         </div>
         <div class="item__bottom">
